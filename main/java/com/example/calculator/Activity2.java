@@ -31,7 +31,8 @@ public class Activity2 extends AppCompatActivity {
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         if (savedInstanceState != null && savedInstanceState.containsKey("mainText")) {
-            int[] nums = savedInstanceState.getIntArray("nums");
+           count = savedInstanceState.getInt("Count");
+           secondCount = savedInstanceState.getInt("secondCount");
         }
     }
 }
