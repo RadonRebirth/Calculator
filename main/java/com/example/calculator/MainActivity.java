@@ -19,30 +19,10 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("secondCount", secondCount);
         startActivity(intent);
     }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        EditText firstTermInput = (EditText) findViewById(R.id.editTextNumber);
-        EditText secondTermInput = (EditText) findViewById(R.id.editTextNumber2);
-
-        firstTermInput.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean hasFocus) {
-                if (hasFocus) {
-                    firstTermInput.setText("");
-                }
-            }
-        });
-        secondTermInput.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean hasFocus) {
-                if (hasFocus) {
-                    secondTermInput.setText("");
-                }
-            }
-        });
     }
     public void onClick(View view) {
         TextView firstTerm = findViewById(R.id.editTextNumber);
@@ -63,21 +43,18 @@ public class MainActivity extends AppCompatActivity {
             message.show();
         }
     }
-
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putIntArray("nums", new int[]{count, secondCount});
+        outState.putInt("Count", count);
+        outState.putInt("secondCount", secondCount);
     }
-
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        if (savedInstanceState != null && savedInstanceState.containsKey("nums")) {
-            int[] nums = savedInstanceState.getIntArray("nums");
-            count = nums[0];
-            secondCount = nums[1];
-            if (!(count == 0 && secondCount == 0)) {
-                resetUI();
-            }
+        if (savedInstanceState != null && savedInstanceState.containsKey("Count")) {
+            count = savedInstanceState.getInt("Count");
+        }
+        if (savedInstanceState != null && savedInstanceState.containsKey("secondCount")) {
+            secondCount = savedInstanceState.getInt("secondCount");
         }
     }
     protected void resetUI() {
@@ -85,5 +62,9 @@ public class MainActivity extends AppCompatActivity {
         countScore.setText(String.valueOf(count));
         TextView secondScore = findViewById(R.id.editTextNumber2);
         secondScore.setText(String.valueOf(secondCount));
+    }
+    public void onResume() {
+        super.onResume();
+        resetUI();
     }
 }
