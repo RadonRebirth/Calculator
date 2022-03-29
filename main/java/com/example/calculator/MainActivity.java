@@ -12,7 +12,6 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
     int count;
     int secondCount;
-
     public void openActivity2() {
         Intent intent = new Intent(this, Activity2.class);
         intent.putExtra("count", count);
@@ -32,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
             secondCount = Integer.parseInt(String.valueOf(secondTerm.getText()));
             openActivity2();
         } catch (Exception ex) {
-            AlertDialog.Builder message = new AlertDialog.Builder(MainActivity.this);
+            AlertDialog.Builder message = new AlertDialog.Builder(this);
             message.setTitle("Ошибка");
             message.setMessage("Неверные входные данные, введите еще раз");
             message.setPositiveButton("Ок", new DialogInterface.OnClickListener() {
